@@ -60,8 +60,7 @@ ggplot(data, aes(x = Volume)) +
   labs(
     title = "Frequency Histograms of Limb Volume by Species",
     x = "Limb Volume",
-    y = "Frequency"
-  )
+    y = "Frequency")
 
 
 
