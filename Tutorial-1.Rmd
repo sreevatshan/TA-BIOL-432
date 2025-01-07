@@ -1,0 +1,75 @@
+---
+title: "Biol432 Tutorial - 1 Markdown"
+author: "Sree"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Load Required Libraries and Data
+
+```{r setup, include=TRUE}
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tinytex)
+
+# Load the revised measurements.csv
+data <- read.csv("measurements.csv")
+
+# Display the first few rows of the dataset
+head(data)
+```
+
+## Sorting of the data
+
+```{r sorting of data, include=TRUE}
+# Sort data by Species, Observer, and Volume
+sorted_data <- data %>%
+  arrange(Species, Observer, Volume)
+
+# Display the sorted dataset
+head(sorted_data)
+```
+
+## Calculating the average limb volume of species
+
+```{r average limb volume of species}
+# Create a table showing the average volume for each species
+average_volume <- data %>%
+  group_by(Species) %>%
+  summarize(Average_Volume = mean(Volume, na.rm = TRUE))
+
+
+## Create a box plot comparing limb volumes by species
+```{r }
+ggplot(data, aes(x = Species, y = Volume)) +
+  geom_boxplot(fill = "lightblue", color = "darkblue") +
+  theme_minimal() +
+  labs(
+    title = "Distribution of Limb Volume by Species",
+    x = "Species",
+    y = "Limb Volume")
+
+```{r}
+# Create frequency histograms for limb volume by species
+ggplot(data, aes(x = Volume)) +
+  geom_histogram(binwidth = 1, fill = "lightgreen", color = "darkgreen") +
+  facet_wrap(~ Species, scales = "free_y") +
+  theme_minimal() +
+  labs(
+    title = "Frequency Histograms of Limb Volume by Species",
+    x = "Limb Volume",
+    y = "Frequency"
+  )
+
+
+
+
+
+
+
+
+
+
+
