@@ -10,7 +10,9 @@ str(bird_data)
 
 ##Extracting the numeric column for modification
 
-numeric_data <- bird_data %>% select(where(is.numeric))
+numeric_data <- bird_data %>% 
+  select(-ID) %>%
+  select(where(is.numeric))
 
 ## Identifying the missing summary
 missing_summary <- colSums(is.na(bird_data))
